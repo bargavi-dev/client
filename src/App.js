@@ -1,24 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import Posts from './components/Posts';
+import { Container, Header, Segment } from 'semantic-ui-react'
+import { Link, Route, Switch } from 'react-router-dom';
+import PostDetail from './components/PostDetail';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Segment vertical>
+        <Switch>
+          <Route path="/" exact component={Posts} />
+          <Route path="/post/:postId" component={PostDetail} />
+          {/* Fallback Page - 404 */}
+          <Route>
+            <Segment vertical textAlign="center">
+              <Header>404 - Page not found</Header>
+              <Link to="/">Click here to return home</Link>
+            </Segment>
+          </Route>
+        </Switch>
+      </Segment>
+    </Container>
   );
 }
 
